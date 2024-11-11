@@ -14,8 +14,14 @@ V(s)=amax​[R(s,a)+γs′∑​P(s′∣s,a)V(s′)]
 ```
 ```math
 (R(s, a)): 即時報酬（immediate reward）。状態 (s) で行動 (a) を取ったときに得られる報酬です。
+```
+```math
 (\gamma): 割引率（discount factor）。未来の報酬の現在価値を計算するための係数で、通常は (0 \leq \gamma < 1) の範囲で設定されます。
+```
+```math
 (P(s’|s, a)): 遷移確率（transition probability）。状態 (s) で行動 (a) を取ったときに次の状態 (s’) へ遷移する確率です。
+```
+```math
 (\sum_{s’}): 次の状態 (s’) についての総和を取ることを示します。
 ```
 
