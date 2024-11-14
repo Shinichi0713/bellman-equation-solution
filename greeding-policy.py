@@ -5,6 +5,7 @@ import copy
 p = [0.8, 0.5, 1.0]
 gamma = 0.95
 
+# 報酬
 r = np.zeros((3, 3, 2))
 r[0, 1, 0] = 1.0
 r[0, 2, 0] = 2.0
@@ -17,11 +18,11 @@ r[2, 1, 0] = 0.0
 r[2, 2, 1] = -1.0
 
 
-# value function
+# 行動価値の初期化
 v = [0, 0, 0]
 v_prev = copy.copy(v)
 
-# value iteration
+# 行動価値関数の初期化
 q = np.zeros((3, 2))
 
 # 方策分布初期化
