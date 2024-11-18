@@ -1,3 +1,4 @@
+
 import numpy as np
 import copy
 
@@ -81,5 +82,7 @@ print("converged step: {step}".format(step=step))
 print("pi: {pi}".format(pi=pi))
 print("v: {v}".format(v=v))
 print("q: {q}".format(q=q))
+
+
 
 
