@@ -2,12 +2,31 @@
 import numpy as np
 import copy
 
+'''
+シチュエーション：
+状態遷移のMDPが分かっているケース
+価値関数の更新を行い、方策を更新する
+コードの狙い：
+今回の報酬に合うように方策を更新する
+という一連のベルマン方程式のシミュレーションを行う
+'''
+
+
 # MDPの定義
-p = [0.8, 0.5, 1.0]
+p = [0.8, 0.5, 1.0]     
 gamma = 0.95
 
 # 報酬
 r = np.zeros((3, 3, 2))
+# r[0, 1, 0] = 1.0
+# r[0, 2, 0] = 1.0
+# r[0, 0, 1] = 4.0
+# r[1, 0, 0] = 5.0
+# r[1, 2, 0] = -1.0
+# r[1, 1, 1] = -1.0
+# r[2, 0, 0] = 3.0
+# r[2, 1, 0] = 0.0
+# r[2, 2, 1] = -1.0
 r[0, 1, 0] = 1.0
 r[0, 2, 0] = 2.0
 r[0, 0, 1] = 0
@@ -55,10 +74,7 @@ def policy_evaluation(pi, p, r, gamma):
 for step in range(100):
     # 方策評価ステップ
     v = policy_evaluation(pi, p, r, gamma)
-
-    # 価値関数vを確認して収束判断
-    if np.min(v - v_prev) <= 0:
-        break
+    
     print("step: {step}, v: {v}".format(step=step, v=v))
 
     for i in range(3):
@@ -66,14 +82,16 @@ for step in range(100):
             (1-p[i]) * (r[i, (i+2)%3, 0] + gamma*v[(i+2)%3])
         q[i, 1] = r[i, i, 1] + gamma * v[i]
 
-    # 方策更新
-    if q[i, 0] > q[i, 1]:
-        pi[i] = 1
-    elif q[i, 0] == q[i, 1]:
-        pi[i] = 0.5
-    else:
-        pi[i] = 0
-    
+        if q[i, 0] > q[i, 1]:
+            pi[i] = 1
+        elif q[i, 0] == q[i, 1]:
+            pi[i] = 0.5
+        else:
+            pi[i] = 0
+    print("step: {step}, pi: {pi}".format(step=step, pi=pi))
+    # 価値関数vを確認して収束判断
+    if np.min(v - v_prev) <= 0:
+        break
     # 現ステップ
     v_prev = copy.copy(v)
 
